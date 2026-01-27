@@ -1,8 +1,3 @@
-# Webpack Project Template
+# Weather App
 
-A starter template for JS projects using:
-- Webpack 5
-- Development and Production configs
-- HTMLWebpackPlugin
-- Image and font asset support
-- ESLint and Prettier
+This is a project from the Odin curriculum that will demonstrate intermediate skills in HTML, CSS, and JavaScript with the usage of Webpack. This project will focus on the usage of promises and async/await by fetching and manipulating data from an API.
