@@ -1,4 +1,6 @@
-export function renderWeather(weatherData){
+import { formatTemp } from "./tempConversion";
+
+export function renderWeather(weatherData, unit){
     const location = document.querySelector(".location");
     const currTemp = document.querySelector(".current-temp");
     const highLow = document.querySelector(".high-low");
@@ -25,11 +27,11 @@ export function renderWeather(weatherData){
 
     // Top
     location.textContent = weatherData.location;
-    currTemp.textContent = `${weatherData.current.temp} °F`;
-    highLow.textContent = `H: ${weatherData.today.high}° / L: ${weatherData.today.low}°`;
+    currTemp.textContent = formatTemp(weatherData.current.temp, unit);
+    highLow.textContent = `H: ${formatTemp(weatherData.today.high, unit)} / L: ${formatTemp(weatherData.today.low, unit)}`;
 
     // Bottom
-    currFeelsLike.textContent = `Feels like: ${weatherData.current.feelsLike}°`;
+    currFeelsLike.textContent = `Feels like: ${formatTemp(weatherData.current.feelsLike, unit)}`;
     dateTime.textContent = `${weatherData.today.date}, ${weatherData.current.time}`;
     currCondition.textContent = weatherData.current.conditions;
 
@@ -136,7 +138,7 @@ export function renderWeather(weatherData){
 
 
         // Day container top
-        const [year, month, dayNum] = day.date.split("-");  // Destructure into array
+        const [year, month, dayNum] = day.date.split("-");  // Destructure date into array
         const dateObj = new Date(year, month - 1, dayNum);
 
         const weekday = dateObj.toLocaleString("en-us", {
@@ -151,9 +153,9 @@ export function renderWeather(weatherData){
         dayOfWeek.textContent = weekday;
         forecastDate.textContent = fullDate;
 
-        forecastTemp.textContent = `${day.temp} °F`;
-        forecastHighLow.textContent = `H: ${day.high}° / L: ${day.low}°`;
-        forecastFeelsLike.textContent = `Feels like: ${day.feelsLike}°`;
+        forecastTemp.textContent = formatTemp(day.temp, unit);
+        forecastHighLow.textContent = `H: ${formatTemp(day.high, unit)} / L: ${formatTemp(day.low, unit)}`;
+        forecastFeelsLike.textContent = `Feels like: ${formatTemp(day.feelsLike, unit)}`;
         forecastCondition.textContent = day.conditions;
 
         // Day container bottom
