@@ -1,4 +1,5 @@
 import { formatTemp } from "./tempConversion";
+import { weatherAssets } from "./weatherAssets";
 
 export function renderWeather(weatherData, unit){
     const location = document.querySelector(".location");
@@ -23,9 +24,26 @@ export function renderWeather(weatherData, unit){
 
     const forecastContainer = document.querySelector(".forecast-container");
 
+    const body = document.body;
+    const currentIconImg = document.querySelector(".current-weather-icon");
+
+    const currentIcon = weatherData.current.icon;
+    const weatherImg = weatherAssets[currentIcon];
+
+    if(weatherImg){
+        body.style.backgroundImage = `url(${weatherImg.bg})`;
+        body.style.backgroundRepeat = "no-repeat";
+        body.style.backgroundSize = "cover";
+    }
+
+
     forecastContainer.innerHTML = "";
 
     // Top
+    if(weatherImg){
+        currentIconImg.src = weatherImg.icon;
+        currentIconImg.alt = weatherData.current.icon;
+    }
     location.textContent = weatherData.location;
     currTemp.textContent = formatTemp(weatherData.current.temp, unit);
     highLow.textContent = `H: ${formatTemp(weatherData.today.high, unit)} / L: ${formatTemp(weatherData.today.low, unit)}`;
@@ -94,6 +112,9 @@ export function renderWeather(weatherData, unit){
         const forecastDate = document.createElement("p");
         forecastDate.classList.add("forecast-date");
 
+        const forecastIcon = document.createElement("img");
+        forecastIcon.classList.add("forecast-icon");
+
         const forecastTemp = document.createElement("p");
         forecastTemp.classList.add("forecast-temp");
 
@@ -150,6 +171,12 @@ export function renderWeather(weatherData, unit){
             day: "numeric"
         });
 
+        const forecastImgIcon = weatherAssets[day.icon];
+        if(forecastImgIcon){
+            forecastIcon.src = forecastImgIcon.icon;
+            forecastIcon.alt = day.icon;
+        }
+
         dayOfWeek.textContent = weekday;
         forecastDate.textContent = fullDate;
 
@@ -183,7 +210,7 @@ export function renderWeather(weatherData, unit){
         forecastVisibilityValue.textContent = `${day.visibility} mi`;
         forecastVisibilityContainer.append(forecastVisibility, forecastVisibilityValue);
 
-        dayTop.append(dayOfWeek, forecastDate, forecastTemp, forecastHighLow, forecastFeelsLike, forecastCondition);
+        dayTop.append(dayOfWeek, forecastDate, forecastIcon, forecastTemp, forecastHighLow, forecastFeelsLike, forecastCondition);
         dayBottom.append(forecastWindSpeedContainer, forecastWindGustContainer, forecastWindDirectionContainer, forecastUVContainer, forecastHumidityContainer, forecastVisibilityContainer);
 
         dayContainer.append(dayTop, dayBottom);
