@@ -13,7 +13,7 @@ export function displayApp(){
     const statusMsg = document.querySelector(".status-msg");
     const closeBtn = document.querySelector(".close-btn");
 
-    let currentUnit = "F";
+    let currentUnit = localStorage.getItem("unit") || "F";
     let weatherData = null;
 
     async function loadWeather(location){
@@ -34,11 +34,13 @@ export function displayApp(){
 
     fahrenheitBtn.addEventListener("click", () => {
         currentUnit = "F";
+        localStorage.setItem("unit", "F");
         renderWeather(weatherData, currentUnit);
     });
 
     celsiusBtn.addEventListener("click", () => {
         currentUnit = "C";
+        localStorage.setItem("unit", "C");
         renderWeather(weatherData, currentUnit);
     });
 
