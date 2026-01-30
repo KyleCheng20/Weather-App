@@ -11,6 +11,7 @@ export async function getWeatherData(location, apiKey) {
     console.log(data);
     return data;
   } catch (error) {
-    console.log(error);
+    console.error("Weather fetch failed:", error);
+    throw new Error(error);
   }
 }

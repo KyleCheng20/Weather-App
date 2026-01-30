@@ -2,31 +2,46 @@ import { getWeatherData } from "./getWeatherData";
 import { processWeatherData } from "./processWeatherData";
 import { renderWeather } from "./renderWeather";
 
-export async function displayApp(){
+const API_KEY = "8V8B5T4ADFQXMCR6T35AH89ZZ";
+
+export function displayApp(){
     const fahrenheitBtn = document.querySelector(".fahrenheit-btn");
     const celsiusBtn = document.querySelector(".celsius-btn");
-
-    const API_KEY = "8V8B5T4ADFQXMCR6T35AH89ZZ";
+    const searchForm = document.querySelector(".search-location");
+    const searchInput = document.querySelector("#search");
 
     let currentUnit = "F";
+    let weatherData = null;
 
-    function setCurrentUnit(unit){
-        currentUnit = unit;
+    async function loadWeather(location){
+        try {
+            const data = await getWeatherData(location, API_KEY);
+            weatherData = processWeatherData(data);
+            renderWeather(weatherData, currentUnit);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     fahrenheitBtn.addEventListener("click", () => {
-        setCurrentUnit("F");
+        currentUnit = "F";
         renderWeather(weatherData, currentUnit);
     });
 
     celsiusBtn.addEventListener("click", () => {
-        setCurrentUnit("C");
+        currentUnit = "C";
         renderWeather(weatherData, currentUnit);
     });
 
-    const data = await getWeatherData("Philadelphia", API_KEY);
+    searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
 
-    const weatherData = processWeatherData(data);
+        const location = searchInput.value.trim();
+        if(!location) return;
 
-    renderWeather(weatherData, currentUnit);
+        loadWeather(location);
+        searchForm.reset();
+    });
+
+    loadWeather("Philadelphia");
 }
