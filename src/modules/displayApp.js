@@ -9,6 +9,9 @@ export function displayApp(){
     const celsiusBtn = document.querySelector(".celsius-btn");
     const searchForm = document.querySelector(".search-location");
     const searchInput = document.querySelector("#search");
+    const statusDialog = document.querySelector(".status-popup");
+    const statusMsg = document.querySelector(".status-msg");
+    const closeBtn = document.querySelector(".close-btn");
 
     let currentUnit = "F";
     let weatherData = null;
@@ -19,9 +22,15 @@ export function displayApp(){
             weatherData = processWeatherData(data);
             renderWeather(weatherData, currentUnit);
         } catch (error) {
+            statusDialog.showModal();
+            statusMsg.textContent = "City not found or network error.";
             console.log(error);
         }
     }
+
+    closeBtn.addEventListener("click", () => {
+        statusDialog.close();
+    });
 
     fahrenheitBtn.addEventListener("click", () => {
         currentUnit = "F";
