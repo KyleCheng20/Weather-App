@@ -106,6 +106,9 @@ export function renderWeather(weatherData, unit){
         const dayBottom = document.createElement("div");
         dayBottom.classList.add("day-bottom");
 
+        const forecastTopInfo = document.createElement("div");
+        forecastTopInfo.classList.add("forecast-top-info");
+
         const dayOfWeek = document.createElement("p");
         dayOfWeek.classList.add("day-of-week");
 
@@ -210,7 +213,9 @@ export function renderWeather(weatherData, unit){
         forecastVisibilityValue.textContent = `${day.visibility} mi`;
         forecastVisibilityContainer.append(forecastVisibility, forecastVisibilityValue);
 
-        dayTop.append(dayOfWeek, forecastDate, forecastIcon, forecastTemp, forecastHighLow, forecastFeelsLike, forecastCondition);
+        forecastTopInfo.append(forecastTemp, forecastHighLow, forecastFeelsLike, forecastCondition);
+
+        dayTop.append(dayOfWeek, forecastDate, forecastIcon, forecastTopInfo);
         dayBottom.append(forecastWindSpeedContainer, forecastWindGustContainer, forecastWindDirectionContainer, forecastUVContainer, forecastHumidityContainer, forecastVisibilityContainer);
 
         dayContainer.append(dayTop, dayBottom);
