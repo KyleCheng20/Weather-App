@@ -24,7 +24,7 @@ body {
         "aside footer";
     min-height: 100vh;
     color: white;
-    font-family: "geist";
+    font-family: "geist", sans-serif;
     padding: 1.75rem;
     gap: 2rem;
 }
@@ -50,6 +50,7 @@ header{
 .header-container{
     display: flex;
     justify-content: space-between;
+    padding: 0 1rem;
 }
 
 .header-left{
@@ -61,12 +62,63 @@ header{
 .search-location{
     display: flex;
     align-items: center;
-    
+    gap: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: 0.2s ease;
+}
+
+.search-location:focus-within{
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+
+.search-location input{
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    font-size: 0.9rem;
+    font-family: "geist", sans-serif;
+    padding: 0.4rem 0.1rem;
+}
+
+.search-location input::placeholder{
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #ffffff;
+    font-size: 0.9rem;
+    font-family: "geist", sans-serif;
+    box-shadow: inset 0 0 20px 20px rgba(255, 255, 255, 0);
+}
+
+.search-location svg{
+    width: 25px;
+    height: 25px;
+}
+
+.search-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.2s ease;
+}
+
+.search-btn:hover{
+    color: white;
 }
 
 .header-right{
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .fahrenheit-btn,
@@ -78,12 +130,14 @@ header{
     border: 1px solid rgba(255, 255, 255, 0.247);
     border-radius: 50%;
     padding: 1.10rem;
+    transition: 0.2s ease;
 }
 
-header svg{
-    width: 25px;
-    height: 25px;
+.fahrenheit-btn:hover,
+.celsius-btn:hover{
+    background-color: rgba(255, 255, 255, 0.13);
 }
+
 
 /* --Sidebar-- */
 aside{
