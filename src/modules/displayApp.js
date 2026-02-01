@@ -28,6 +28,11 @@ export function displayApp(){
         }
     }
 
+    function toggleActiveUnit(unit){
+        fahrenheitBtn.classList.toggle("active", unit === "F");
+        celsiusBtn.classList.toggle("active", unit === "C");
+    }
+
     closeBtn.addEventListener("click", () => {
         statusDialog.close();
     });
@@ -35,12 +40,14 @@ export function displayApp(){
     fahrenheitBtn.addEventListener("click", () => {
         currentUnit = "F";
         localStorage.setItem("unit", "F");
+        toggleActiveUnit(currentUnit);
         renderWeather(weatherData, currentUnit);
     });
 
     celsiusBtn.addEventListener("click", () => {
         currentUnit = "C";
         localStorage.setItem("unit", "C");
+        toggleActiveUnit(currentUnit);
         renderWeather(weatherData, currentUnit);
     });
 
@@ -54,5 +61,6 @@ export function displayApp(){
         searchForm.reset();
     });
 
+    toggleActiveUnit(currentUnit);
     loadWeather("Philadelphia");
 }
