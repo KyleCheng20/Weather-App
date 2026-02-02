@@ -27,6 +27,7 @@ export function processWeatherData(data) {
 
     current: {
       conditions: data.currentConditions.conditions,
+      description: data.description,
       time: data.currentConditions.datetime,
       feelsLike: data.currentConditions.feelslike,
       humidity: data.currentConditions.humidity,

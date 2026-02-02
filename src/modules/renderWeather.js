@@ -8,6 +8,7 @@ export function renderWeather(weatherData, unit){
     const currFeelsLike = document.querySelector(".feels-like");
     const dateTime = document.querySelector(".date-time");
     const currCondition = document.querySelector(".current-condition");
+    const currDescription = document.querySelector(".current-description");
 
     const windSpeedValue = document.querySelector(".wind-speed-value");
     const windGustValue = document.querySelector(".wind-gust-value");
@@ -59,7 +60,7 @@ export function renderWeather(weatherData, unit){
     });
 
     const todayTime = currDateObj.toLocaleTimeString("en-US", {
-        h12: true,
+        hour12: true,
         hour: "numeric",
         minute: "2-digit"
     });
@@ -67,6 +68,7 @@ export function renderWeather(weatherData, unit){
     dateTime.textContent = `${todayDate}, ${todayTime}`;
 
     currCondition.textContent = weatherData.current.conditions;
+    currDescription.textContent = weatherData.current.description;
 
     windSpeedValue.textContent = weatherData.current.wind.speed;
     windGustValue.textContent = weatherData.current.wind.gust;
