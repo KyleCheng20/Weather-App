@@ -425,3 +425,45 @@ footer svg{
 footer svg:hover{
     fill: rgba(255, 255, 255, 0.5);
 }
+
+/* --Dialog-- */
+dialog{
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.048);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.247);
+    color: white;
+    gap: 1.5rem;
+    font-size: 1.35rem;
+    font-family: "geist", sans-serif;
+    padding: 1rem 1.75rem;
+    margin: auto;
+}
+
+dialog[open]{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+dialog::backdrop{
+    background: rgba(255, 255, 255, 0.178);
+    backdrop-filter: blur(2px);
+}
+
+.close-btn{
+    border: 1px solid rgba(255, 255, 255, 0.329);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.048);;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: "geist", sans-serif;
+    padding: 0.9rem 1.75rem;
+    transition: 0.25s ease;
+}
+
+.close-btn:hover{
+    background-color: rgba(255, 255, 255, 0.13);;
+}
