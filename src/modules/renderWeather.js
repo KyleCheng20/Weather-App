@@ -50,7 +50,22 @@ export function renderWeather(weatherData, unit){
 
     // Bottom
     currFeelsLike.textContent = `Feels like: ${formatTemp(weatherData.current.feelsLike, unit)}`;
-    dateTime.textContent = `${weatherData.today.date}, ${weatherData.current.time}`;
+        
+    const currDateObj = new Date(`${weatherData.today.date}T${weatherData.current.time}`);
+    const todayDate = currDateObj.toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric"
+    });
+
+    const todayTime = currDateObj.toLocaleTimeString("en-US", {
+        h12: true,
+        hour: "numeric",
+        minute: "2-digit"
+    });
+
+    dateTime.textContent = `${todayDate}, ${todayTime}`;
+
     currCondition.textContent = weatherData.current.conditions;
 
     windSpeedValue.textContent = weatherData.current.wind.speed;
